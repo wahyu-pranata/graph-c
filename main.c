@@ -59,18 +59,6 @@ void connectGraph(int vertexA, int vertexB, int **graph)
   };
 }
 
-int *createHm(int **graph, int vertex)
-{
-  int *hm = malloc((vertex - 1) * sizeof(int));
-
-  for (int i = 1; i < vertex; i++)
-  {
-    hm[i - 1] = graph[1][i];
-  }
-
-  return hm;
-}
-
 void enqueue(int vertex, int *queue)
 {
   if (front == -1)
