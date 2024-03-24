@@ -12,11 +12,16 @@ int getVertex()
 void connectGraph(int vertexA, int vertexB, int **graph)
 {
   char userInput = '\0';
-  int firstAttempt = 0;
+  int isFirstAttempt = 0;
+
   while (userInput != 'y' && userInput != 'n')
   {
-
-    printf("Apakah vertex %d dan vertex %d terhubung? [y/n]\n", vertexA, vertexB);
+    scanf("%*c");
+    if (isFirstAttempt == 1)
+    {
+      printf("Masukkan nilai yang benar [y/n]\n");
+    }
+    printf("Apakah vertex %d dan vertex %d terhubung?\n", vertexA, vertexB);
     scanf("%c", &userInput);
 
     if (userInput == 'y')
@@ -27,6 +32,7 @@ void connectGraph(int vertexA, int vertexB, int **graph)
     {
       graph[vertexA][vertexB] = 0;
     }
+    isFirstAttempt = 1;
   };
 }
 
