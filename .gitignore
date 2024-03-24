@@ -1,1 +1,6 @@
+# Output
 a.out
+
+# For debugging
+main
+.vscode
