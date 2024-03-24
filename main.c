@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int front = -1;
+int rear = -1;
+
 int getVertex()
 {
   int vertex = 0;
@@ -56,6 +59,67 @@ void connectGraph(int vertexA, int vertexB, int **graph)
   };
 }
 
+int *createHm(int **graph, int vertex)
+{
+  int *hm = malloc((vertex - 1) * sizeof(int));
+
+  for (int i = 1; i < vertex; i++)
+  {
+    hm[i - 1] = graph[1][i];
+  }
+
+  return hm;
+}
+
+void enqueue(int vertex, int *queue)
+{
+  if (front == -1)
+  {
+    front = 0;
+  }
+  rear++;
+  queue[rear] = vertex;
+}
+
+int dequeue(int *queue)
+{
+  int vertex = queue[front];
+  front++;
+  return vertex;
+}
+
+void checkConnectedGraph(int start, int **graph, int vertex)
+{
+  int visited[vertex];
+  int queue[vertex];
+  for (int i = 0; i < vertex; i++)
+  {
+    visited[i] = 0;
+  }
+
+  visited[start] = 1;
+  enqueue(start, queue);
+
+  printf("Hubungan graf %d: ", start);
+
+  while (!(front == -1 || front > rear))
+  {
+    int current = dequeue(queue);
+    printf("%d->", current);
+
+    for (int i = 0; i < vertex; i++)
+    {
+      if (graph[current][i] && !visited[i])
+      {
+        visited[i] = 1;
+        enqueue(i, queue);
+      }
+    }
+  }
+
+  printf("\n");
+}
+
 void getDegree(int **graph, int vertex, int vertexNo)
 {
   int count = 0;
@@ -106,6 +170,7 @@ int main()
     printf("\n");
   }
 
+  checkConnectedGraph(0, graph, vertex);
   getDegree(graph, vertex, 1);
 
   free(graph);
