@@ -44,7 +44,7 @@ void connectGraph(int vertexA, int vertexB, int **graph)
     {
       printf("Masukkan nilai yang benar [y/n]\n");
     }
-    printf("Apakah vertex %d dan vertex %d terhubung?\n", vertexA, vertexB);
+    printf("Apakah vertex %d dan vertex %d terhubung? [y/n]\n ", vertexA, vertexB);
     scanf("%c", &userInput);
 
     if (userInput == 'y')
