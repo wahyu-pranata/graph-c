@@ -9,15 +9,25 @@ int getVertex()
   return vertex;
 }
 
-void connectGraph(int vertexA, int vertexB, int *graph)
+void connectGraph(int vertexA, int vertexB, int **graph)
 {
-  int value;
-  do
+  char userInput = '\0';
+  int firstAttempt = 0;
+  while (userInput != 'y' && userInput != 'n')
   {
-    printf("%d", value);
-    printf("Apakah vertex %d dan vertex %d terhubung? [Iya (0)/Tidak (1)]", vertexA, vertexB);
 
-  } while (value != 0 || value != 1);
+    printf("Apakah vertex %d dan vertex %d terhubung? [y/n]\n", vertexA, vertexB);
+    scanf("%c", &userInput);
+
+    if (userInput == 'y')
+    {
+      graph[vertexA][vertexB] = 1;
+    }
+    else if (userInput == 'n')
+    {
+      graph[vertexA][vertexB] = 0;
+    }
+  };
 }
 
 int **createGraph(int vertex)
@@ -60,7 +70,10 @@ int main()
       {
         graph[i][j] = 0;
       }
-      graph[i][j] = i + j;
+      else
+      {
+        connectGraph(i, j, graph);
+      }
     }
   }
 
